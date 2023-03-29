@@ -1,24 +1,22 @@
 import "./App.css";
+import { useState, useRef } from "react";
 
 import ImcView from "./views/ImcView";
 import ImcController from "./controllers/ImcController";
 import Person from "./domain/Person";
-import { useState } from "react";
 
 
 function App() {
 
-  const [person, setPerson] = useState(new Person())
+  const [person, setPerson] = useState(new Person());
+  const heightElem = useRef();
+  const weightElem = useRef();
 
-  const calculateImc = async () => {
-    const heightElem = document.querySelector("#altura");
-    const weightElem = document.querySelector("#peso");
-  
-    if (!heightElem) throw Error("height is required!");
-    if (!weightElem) throw Error("weight is required!");
-  
-    const height = Number(heightElem.value);
-    const weight = Number(weightElem.value);
+  const calculateImc = async (evt) => {
+    evt.preventDefault();
+    
+    const height = Number(heightElem.current.value);
+    const weight = Number(weightElem.current.value);
   
     const p = new Person(height, weight);
   
@@ -36,17 +34,19 @@ function App() {
           <div className="row">
           </div>
           <hr />
-          <div className="row">
-            <label>Altura</label>
-            <input id="altura" placeholder="0.00" />
-          </div>
-          <div className="row">
-            <label>Peso</label>
-            <input id="peso" placeholder="0.00" />
-          </div>
-          <button type="button" onClick={calculateImc} className="action">
-            Calcular
-          </button>
+          <form onSubmit={calculateImc}>
+            <div className="row">
+              <label>Altura</label>
+              <input id="altura" ref={heightElem} placeholder="0.00" />
+            </div>
+            <div className="row">
+              <label>Peso</label>
+              <input id="peso" ref={weightElem} placeholder="0.00" />
+            </div>
+            <button type="submit" className="action">
+              Calcular
+            </button>
+          </form>
         </div>
       </div>
       <hr />
