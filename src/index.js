@@ -1,6 +1,7 @@
 import React, { lazy, Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+import MessageApp from "./MessageApp";
 import PersonContextProvider from './contexts/PersonContextProvider';
 import reportWebVitals from './reportWebVitals';
 
@@ -14,6 +15,7 @@ root.render(
       <Suspense fallback={<span>carregando...</span>}>
         <App />
       </Suspense>
+      <MessageApp />
     </PersonContextProvider>
   </React.StrictMode>
 );
