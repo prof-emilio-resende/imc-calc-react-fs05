@@ -1,6 +1,10 @@
+import { useContext } from "react";
+import { PersonContext } from "../contexts/PersonContextProvider";
+
 export default function ImcView(props) {
 
-    const {person, className} = props;
+    const {className} = props;
+    const { person } = useContext(PersonContext);
 
     return (
         <div className={className}>
