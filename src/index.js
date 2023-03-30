@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import PersonContextProvider from './contexts/PersonContextProvider';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+
+const App = lazy(() => import("./App"));
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <PersonContextProvider>
-      <App />
+      <Suspense fallback={<span>carregando...</span>}>
+        <App />
+      </Suspense>
     </PersonContextProvider>
   </React.StrictMode>
 );
